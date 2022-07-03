@@ -19,7 +19,7 @@ class QuizStarter:
   #users input is taken by an Entr Widget
     self.entry_box=Entry(parent)
     self.entry_box=Entry(window,width=13)
-    self.entry_box.place(x=450,y=410)
+    self.entry_box.place(x=455,y=410)
     #Continue button
     self.continue_button = Button(window, text="Start Quiz ", font=("Helvetica","13","bold"), bg="orange",command=self.name_collection)
     self.continue_button.place(x=447,y=440)
@@ -34,7 +34,11 @@ class QuizStarter:
     
 class Quizquestions:
   def __init__(self, parent):
-    background_color="orange"
+    bg_image = Image.open("questionframe.jpg")
+    bg_image = bg_image.resize((950,750),Image.ANTIALIAS)
+    bg_image = ImageTk.PhotoImage(bg_image)
+    image_label.configure(image=bg_image)
+    image_label.place(x=0, y=0, relwidth=1, relheight=1)
 
     self.quiz_questions = {
       1:["When was basketball officially invented?",
@@ -113,37 +117,39 @@ class Quizquestions:
     #self.quiz_frame.grid()
 
     randomiser()
-    img= Image.open("questionframe.jpg")
-    img= img.resize((950,750),Image.ANTIALIAS)
+    # img= Image.open("questionframe.jpg")
+    # img= img.resize((950,750),Image.ANTIALIAS)
 
-    picture = ImageTk.PhotoImage(img)
-    image_label.configure(image = picture)
+    # picture = ImageTk.PhotoImage(img)
+    # image_label.configure(image = picture)
 
     self.question_label=Label(window, text = self.quiz_questions[qnum][0], font =( "Tw Cen MT","18","bold"))
     self.question_label.grid(row= 0, padx=10, pady=10)  
 
     self.con1=IntVar()
 
-    self.rb1 = Radiobutton(window, text = self.quiz_questions[qnum][1], font=("Helvetica", "12"), bg=background_color, value=1, variable=self.con1, pady=10)
+    self.rb1 = Radiobutton(window, text = self.quiz_questions[qnum][1], font=("Helvetica", "12"),  value=1, variable=self.con1, pady=10)
     self.rb1.grid(row=1, sticky=W)
 
-    self.rb2 = Radiobutton(window, text = self.quiz_questions[qnum][2], font=("Helvetica", "12"), bg=background_color, value=2, variable=self.con1, pady=10)
+    self.rb2 = Radiobutton(window, text = self.quiz_questions[qnum][2], font=("Helvetica", "12"),  value=2, variable=self.con1, pady=10)
     self.rb2.grid(row=2, sticky=W)
 
-    self.rb3 = Radiobutton(window, text = self.quiz_questions[qnum][3], font=("Helvetica", "12"), bg=background_color, value=3, variable=self.con1, pady=10)
+    self.rb3 = Radiobutton(window, text = self.quiz_questions[qnum][3], font=("Helvetica", "12"), value=3, variable=self.con1, pady=10)
     self.rb3.grid(row=3, sticky=W)
 
-    self.rb4 = Radiobutton(window, text = self.quiz_questions[qnum][4], font=("Helvetica", "12"), bg=background_color, value=4, variable=self.con1, pady=10)
+    self.rb4 = Radiobutton(window, text = self.quiz_questions[qnum][4], font=("Helvetica", "12"),  value=4, variable=self.con1, pady=10)
     self.rb4.grid(row=4, sticky=W)
-
+   
     self.confirm_button = Button(window, text="Confrim",bg="white",command=self.quiz_progress)
     self.confirm_button.place(x=300,y=235)
-   
+
     self.score_label  = Label(window, text = 'score')
-    self.score_label.place(x=390,y=240)  
+    self.score_label.place(x=50,y=340)  
 
     self.leave=Button(window,text="Leave",font=("Helvetica","13","bold"),bg="lightblue",command=self.end_screen)
     self.leave.place(x=50,y=235)
+
+    
 
    
   def questions_setup(self):
@@ -186,6 +192,12 @@ class Quizquestions:
                   scr_label.configure(text="The correct answer was: " + self.quiz_questions[qnum][5])
                   self.confirm_button.config(text="Confirmn")
                   self.questions_setup()
+  
+  def end_screen(self):
+        window.destroy()
+        name_list = names[0]
+
+        open_end_object = end()  
              
 if __name__== "__main__":
     window = Tk()
