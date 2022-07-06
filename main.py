@@ -102,7 +102,7 @@ class Quizquestions:
         'runs the offense and usually is the teams best dribbler and passer',
         'score points for their team and steal the ball on defense',
         'plays against small and large players',
-        'the tallest player on each team, playing near the basket'
+        'the tallest player on each team, playing near the basket',
         'runs the offense and usually is the teams best dribbler and passer'
         ,1],
       7:["A free throw is worth",
@@ -224,20 +224,20 @@ class Quizquestions:
 class end:
   def __init__(self):
         background_color = 'darkturquoise'
-        global window2
-        window2 = Tk()
-        window2.title('Exit Box')
-        window2.geometry('700x600')
+        global exitbox
+        exitbox = Tk()
+        exitbox.title('Exit Box')
+        exitbox.geometry('700x600')
 
         # end frame
 
-        self.end_frame = Frame(window2, width=700, height=600,
+        self.end_frame = Frame(exitbox, width=700, height=600,
                                bg=background_color)
         self.end_frame.grid(row=1)
 
         # end heading
 
-        self.end_heading = Label(window2,
+        self.end_heading = Label(exitbox,
                                  text='Nice try, you finished the quiz '
                                  , font=('Tw Cen Mt', 22, 'bold'),
                                  bg=background_color)
@@ -246,7 +246,7 @@ class end:
         # exit button
 
         self.exit_button = Button(
-            window2,
+            exitbox,
             text='Exit',
             width=10,
             bg='lightblue',
@@ -257,7 +257,7 @@ class end:
 
         # list label
 
-        self.list_label = Label(window2, text='Feel free to try again',
+        self.list_label = Label(exitbox, text='Feel free to try again',
                                 font=('Tw Cen Mt', 12, 'bold'),
                                 width=40, bg=background_color)
         self.list_label.place(x=110, y=100)
@@ -267,7 +267,7 @@ class end:
         self.end_heading.destroy()
         self.exit_button.destroy()
         self.list_label.destroy()
-        window2.destroy()
+        exitbox.destroy()
   
 if __name__== "__main__":
     window = Tk()
