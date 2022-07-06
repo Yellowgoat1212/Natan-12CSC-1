@@ -1,6 +1,8 @@
 from tkinter import *
 import random
 from PIL import Image, ImageTk
+from tkinter import messagebox
+
 name_list = []
 asked = []
 score=0
@@ -27,10 +29,30 @@ class QuizStarter:
     
   def name_collection(self):
       name=self.entry_box.get()
-      name_list.append(name)
-      self.entry_box.destroy()
-      self.continue_button.destroy()
-      Quizquestions(window)
+      if name == '':
+            messagebox.showerror('Name is required!',
+                                 'Please enter your name')
+      elif len(name) > 15:
+
+        # to make sure name entered is between 1-15
+
+            messagebox.showerror('limit error',
+                                 'please enter a name between 1 and 15 characters'
+                                 )
+      elif name.isnumeric():
+            messagebox.showerror('Name error',
+                                 'Name can only consist of letters')
+      elif not name.isalpha():
+
+        # to make sure name entered is only letters not numbers
+
+            messagebox.showerror('Symbol error', 'name cant consist of symbols')
+      else:
+    
+       name_list.append(name)
+       self.entry_box.destroy()
+       self.continue_button.destroy()
+       Quizquestions(window)
     
 class Quizquestions:
   def __init__(self, parent):
@@ -82,7 +104,7 @@ class Quizquestions:
         'plays against small and large players',
         'the tallest player on each team, playing near the basket'
         'runs the offense and usually is the teams best dribbler and passer'
-        ,2],
+        ,1],
       7:["A free throw is worth",
         '1 point',
         '2 point',
@@ -195,10 +217,58 @@ class Quizquestions:
   
   def end_screen(self):
         window.destroy()
-        name_list = names[0]
+       
 
         open_end_object = end()  
-             
+
+class end:
+  def __init__(self):
+        background_color = 'darkturquoise'
+        global window2
+        window2 = Tk()
+        window2.title('Exit Box')
+        window2.geometry('700x600')
+
+        # end frame
+
+        self.end_frame = Frame(window2, width=700, height=600,
+                               bg=background_color)
+        self.end_frame.grid(row=1)
+
+        # end heading
+
+        self.end_heading = Label(window2,
+                                 text='Nice try, you finished the quiz '
+                                 , font=('Tw Cen Mt', 22, 'bold'),
+                                 bg=background_color)
+        self.end_heading.place(x=80, y=50)
+
+        # exit button
+
+        self.exit_button = Button(
+            window2,
+            text='Exit',
+            width=10,
+            bg='lightblue',
+            font=('Tw Cen Mt', 12, 'bold'),
+            command=self.close_endbox,
+            )
+        self.exit_button.place(x=260, y=200)
+
+        # list label
+
+        self.list_label = Label(window2, text='Feel free to try again',
+                                font=('Tw Cen Mt', 12, 'bold'),
+                                width=40, bg=background_color)
+        self.list_label.place(x=110, y=100)
+
+  def close_endbox(self):
+        self.end_frame.destroy()
+        self.end_heading.destroy()
+        self.exit_button.destroy()
+        self.list_label.destroy()
+        window2.destroy()
+  
 if __name__== "__main__":
     window = Tk()
     window.title("Basketball Knowledge Quiz")
