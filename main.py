@@ -1,4 +1,4 @@
-
+#the start for the quiz 
 from tkinter import *
 import random
 from PIL import Image, ImageTk
